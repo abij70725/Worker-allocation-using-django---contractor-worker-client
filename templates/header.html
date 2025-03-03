@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - UpConstruction Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../static/assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: UpConstruction
+  * Template URL: https://bootstrapmade.com/upconstruction-bootstrap-construction-website-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="../static/assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">UpConstruction</h1> <span>.</span>
+      </a>
+      {% if user.is_authenticated %}
+        {% if user.userType == 'admin' %}
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/admin_home" class="">Home</a></li>
+            <li class="dropdown"><a href="#"><span>Users</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="/admin_vw_public">Public</a></li>
+                <li><a href="/admin_vw_contractors">Contractors</a></li>
+                <li><a href="/admin_vw_workers">Workers</a></li>
+              </ul>
+            </li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        {% elif user.userType == 'contractor' %}
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/contractor_home" class="">Home</a></li>
+            <li class="dropdown"><a href="#"><span>Workers</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="/contractor_add_worker">Add new worker</a></li>
+                <li><a href="/contractor_vw_workers">View my workers</a></li>
+              </ul>
+            </li>
+            <li><a href="/contractor_vw_requests" class="">Requests</a></li>
+            <li class="dropdown"><a href="#"><span>Payments</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="/contractor_vw_debits">Debited</a></li>
+                <li><a href="/contractor_vw_credits">Credited</a></li>
+              </ul>
+            </li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        {% elif user.userType == 'worker' %}
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/worker_home" class="">Home</a></li>
+            <li><a href="/worker_vw_works">Works</a></li>
+            <li><a href="/worker_vw_payments">Payments</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        {% elif user.userType == 'public' %}
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/public_home" class="">Home</a></li>
+            <li><a href="/public_vw_contractors">Contractrs</a></li>
+            <li><a href="/public_vw_my_requests">My quotations</a></li>
+            <li><a href="/public_vw_my_payments">payments</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        {% endif %}
+      {% else %}
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="/" class="">Home</a></li>
+          <li><a href="/log_in">Login</a></li>
+          <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="/public_reg">Public</a></li>
+              <li><a href="/contractor_reg">Contractor</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li> -->
+            </ul>
+          </li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      {% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
